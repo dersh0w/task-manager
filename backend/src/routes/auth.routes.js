@@ -4,6 +4,7 @@ const { register, login } = require("../controllers/auth.controller");
 
 const authRouter = express.Router();
 
+//TODO: Separar validação das rotas em arquivo separado
 authRouter.post(
   "/register",
   [
