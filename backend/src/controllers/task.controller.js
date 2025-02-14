@@ -2,7 +2,6 @@ const { validationResult } = require("express-validator");
 const { Op } = require("sequelize");
 const Task = require("../models/task.model");
 
-//FIX: status "concluída" dando erro
 //FIX: corrigir o "updated_ad" / "updatedAt" na criação de uma nova task
 exports.addTask = async (req, res) => {
   try {
@@ -50,7 +49,6 @@ exports.addTask = async (req, res) => {
   }
 };
 
-//TODO: Implementar busca por status (req.query)
 exports.getTasks = async (req, res) => {
   try {
     // Validate request

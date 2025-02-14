@@ -1,4 +1,5 @@
 const express = require("express");
+const cors = require("cors");
 const app = express();
 require("./utils/testConnection");
 const authRouter = require("./routes/auth.routes");
@@ -11,6 +12,7 @@ const taskRouter = require("./routes/task.routes");
 //TODO: Implementar error handler
 //TODO: Implementar logger (winston + morgan)
 app.use(express.json());
+app.use(cors()); // Pro front conseguir se comunicar!
 
 app.get("/", (req, res) => {
   res.status(200).json({
