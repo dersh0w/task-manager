@@ -6,11 +6,9 @@ const authRouter = require("./routes/auth.routes");
 const { protectRoute } = require("./middlewares/auth.middleware");
 const taskRouter = require("./routes/task.routes");
 
-//TODO: Dockerizar a aplicação
-//TODO: Otimizar controllers, models e routers
-//TODO: Implementar validação de input e data sanitization
 //TODO: Implementar error handler
 //TODO: Implementar logger (winston + morgan)
+//TODO: Otimizar controllers, models e routers
 app.use(express.json());
 app.use(cors()); // Pro front conseguir se comunicar!
 

@@ -1,5 +1,4 @@
 const { validationResult } = require("express-validator");
-const { Op } = require("sequelize");
 const Task = require("../models/task.model");
 
 //FIX: corrigir o "updated_ad" / "updatedAt" na criação de uma nova task
@@ -104,6 +103,16 @@ exports.getTask = async (req, res) => {
     // Get task id from request
     const taskId = req.params.id;
 
+    if (
+      !Number.isInteger(Number(userId)) ||
+      !Number.isInteger(Number(taskId))
+    ) {
+      return res.status(400).json({
+        status: "fail",
+        message: "Invalid parameters!",
+      });
+    }
+
     // Get task
     const task = await Task.findOne({
       where: {
@@ -114,7 +123,7 @@ exports.getTask = async (req, res) => {
 
     // Task not found
     if (!task) {
-      return res.status(404).json({
+      return res.status(400).json({
         status: "fail",
         message: "Task not found!",
       });
@@ -144,6 +153,16 @@ exports.updateTask = async (req, res) => {
     // Get task id from request
     const taskId = req.params.id;
 
+    if (
+      !Number.isInteger(Number(userId)) ||
+      !Number.isInteger(Number(taskId))
+    ) {
+      return res.status(400).json({
+        status: "fail",
+        message: "Invalid parameters!",
+      });
+    }
+
     // Get updated data from request
     const { title, description, status } = req.body;
 
@@ -157,7 +176,7 @@ exports.updateTask = async (req, res) => {
 
     // Task not found
     if (!task) {
-      return res.status(404).json({
+      return res.status(400).json({
         status: "fail",
         message: "Task not found!",
       });
@@ -181,7 +200,7 @@ exports.updateTask = async (req, res) => {
       },
     });
     updatedTask.user_id = undefined;
-    res.status(203).json({
+    res.status(204).json({
       status: "success",
       message: "Task updated successfully!",
       data: {
@@ -205,6 +224,16 @@ exports.deleteTask = async (req, res) => {
     // Get task id from request
     const taskId = req.params.id;
 
+    if (
+      !Number.isInteger(Number(userId)) ||
+      !Number.isInteger(Number(taskId))
+    ) {
+      return res.status(400).json({
+        status: "fail",
+        message: "Invalid parameters!",
+      });
+    }
+
     // Get task
     const task = await Task.findOne({
       where: {
@@ -215,7 +244,7 @@ exports.deleteTask = async (req, res) => {
 
     // Task not found
     if (!task) {
-      return res.status(404).json({
+      return res.status(400).json({
         status: "fail",
         message: "Task not found!",
       });
