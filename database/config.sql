@@ -14,7 +14,8 @@ CREATE TABLE tasks (
     user_id INT NOT NULL,
     title VARCHAR(255) NOT NULL,
     description TEXT,
-    status ENUM('pendente', 'em progresso', 'concluída') DEFAULT 'pendente',
+    status ENUM('pendente', 'em progresso', 'concluída') DEFAULT 'em progresso',
     created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+    updated_at TIMESTAMP DEFAULT NULL,
     FOREIGN KEY (user_id) REFERENCES users(id) ON DELETE CASCADE
 );
