@@ -1,15 +1,16 @@
 const express = require("express");
 const cors = require("cors");
-const app = express();
 require("./utils/testConnection");
+const morganMiddleware = require("./middlewares/morgan");
 const authRouter = require("./routes/auth.routes");
 const { protectRoute } = require("./middlewares/auth.middleware");
 const taskRouter = require("./routes/task.routes");
+const app = express();
 
 //TODO: Implementar error handler
-//TODO: Implementar logger (winston + morgan)
 //TODO: Otimizar controllers, models e routers
 app.use(express.json());
+app.use(morganMiddleware);
 app.use(cors()); // Pro front conseguir se comunicar!
 
 app.get("/", (req, res) => {

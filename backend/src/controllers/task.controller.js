@@ -1,5 +1,6 @@
 const { validationResult } = require("express-validator");
 const Task = require("../models/task.model");
+const logger = require("../utils/logger");
 
 //FIX: corrigir o "updated_ad" / "updatedAt" na criação de uma nova task
 exports.addTask = async (req, res) => {
@@ -40,7 +41,7 @@ exports.addTask = async (req, res) => {
       },
     });
   } catch (error) {
-    console.error("Error adding task:", error);
+    logger.error("Error adding task:", error);
     res.status(500).json({
       status: "error",
       message: "Server error",
@@ -78,7 +79,7 @@ exports.getTasks = async (req, res) => {
       },
     });
   } catch (error) {
-    console.error("Error getting tasks:", error);
+    logger.error("Error getting tasks:", error);
     res.status(500).json({
       status: "error",
       message: "Server error",
@@ -137,7 +138,7 @@ exports.getTask = async (req, res) => {
       },
     });
   } catch (error) {
-    console.error("Error getting task:", error);
+    logger.error("Error getting task:", error);
     res.status(500).json({
       status: "error",
       message: "Server error",
@@ -208,7 +209,7 @@ exports.updateTask = async (req, res) => {
       },
     });
   } catch (error) {
-    console.error("Error updating task:", error);
+    logger.error("Error updating task:", error);
     res.status(500).json({
       status: "error",
       message: "Server error",
@@ -263,7 +264,7 @@ exports.deleteTask = async (req, res) => {
       message: "Task deleted successfully!",
     });
   } catch (error) {
-    console.error("Error deleting task:", error);
+    logger.error("Error deleting task:", error);
     res.status(500).json({
       status: "error",
       message: "Server error",

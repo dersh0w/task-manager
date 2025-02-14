@@ -2,6 +2,7 @@ require("dotenv").config();
 const jwt = require("jsonwebtoken");
 const { validationResult } = require("express-validator");
 const User = require("../models/user.model");
+const logger = require("../utils/logger");
 
 exports.register = async (req, res) => {
   try {
@@ -45,7 +46,7 @@ exports.register = async (req, res) => {
       },
     });
   } catch (error) {
-    console.error("Error in register:", error);
+    logger.error("Error in register:", error);
     res.status(500).json({
       status: "error",
       message: "Server error",
@@ -101,7 +102,7 @@ exports.login = async (req, res) => {
       },
     });
   } catch (error) {
-    console.error("Error in login:", error);
+    logger.error("Error in login:", error);
     res.status(500).json({
       status: "error",
       message: "Server error",
