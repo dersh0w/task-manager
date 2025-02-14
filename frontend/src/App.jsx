@@ -1,35 +1,39 @@
-import { useState } from 'react'
-import reactLogo from './assets/react.svg'
-import viteLogo from '/vite.svg'
 import './App.css'
+import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
+import Page404 from './pages/Page404';
+import Home from './pages/Home';
+import Register from './pages/Register';
+import Login from './pages/Login'
+import Dashboard from './pages/Dashboard';
+import CreateTask from './pages/CreateTask'
+import Task from './pages/Task';
+import PrivateRoute from './context/PrivateRoute';
 
+//TODO: Dockerizar aplicação
+//TODO: Implementar uma search bar
+//TODO: Refatorar e otimizar código (tudo)
+//TODO: Melhorar a estética
 function App() {
-  const [count, setCount] = useState(0)
 
   return (
     <>
-      <div>
-        <a href="https://vite.dev" target="_blank">
-          <img src={viteLogo} className="logo" alt="Vite logo" />
-        </a>
-        <a href="https://react.dev" target="_blank">
-          <img src={reactLogo} className="logo react" alt="React logo" />
-        </a>
-      </div>
-      <h1>Vite + React</h1>
-      <div className="card">
-        <button onClick={() => setCount((count) => count + 1)}>
-          count is {count}
-        </button>
-        <p>
-          Edit <code>src/App.jsx</code> and save to test HMR
-        </p>
-      </div>
-      <p className="read-the-docs">
-        Click on the Vite and React logos to learn more
-      </p>
+      <Router>
+        <Routes>
+          <Route path="/" element={<Home />}></Route>
+          <Route path="/register" element={<Register />}></Route>
+          <Route path="/login" element={<Login />}></Route>
+
+          <Route element={<PrivateRoute />}>
+            <Route path="/dashboard" element={<Dashboard />}></Route>
+            <Route path="/create-task" element={<CreateTask />}></Route>
+            <Route path="/tasks/:taskId" element={<Task />}></Route>
+          </Route>
+
+          <Route path="*" element={<Page404 />} />
+        </Routes>
+      </Router>
     </>
   )
 }
 
-export default App
+export default App;
