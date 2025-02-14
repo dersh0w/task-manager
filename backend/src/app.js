@@ -5,9 +5,9 @@ const morganMiddleware = require("./middlewares/morgan");
 const authRouter = require("./routes/auth.routes");
 const { protectRoute } = require("./middlewares/auth.middleware");
 const taskRouter = require("./routes/task.routes");
+const globalErrorHandler = require("./controllers/error.controller");
 const app = express();
 
-//TODO: Implementar error handler
 //TODO: Otimizar controllers, models e routers
 app.use(express.json());
 app.use(morganMiddleware);
@@ -22,5 +22,7 @@ app.get("/", (req, res) => {
 
 app.use("/api", authRouter);
 app.use("/api/tasks", protectRoute, taskRouter);
+
+app.use(globalErrorHandler);
 
 module.exports = app;
